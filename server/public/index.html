@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket Chat Test</title>
+</head>
+<body>
+  <h2>DevCollab Chat Test</h2>
+
+  <div>
+    <input id="projectId" placeholder="Enter Project ID" />
+    <button onclick="joinProject()">Join Project</button>
+  </div>
+
+  <br>
+
+  <div>
+    <input id="senderId" placeholder="Enter Your User ID" />
+    <input id="message" placeholder="Enter Message" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <br>
+
+  <h3>Messages:</h3>
+  <ul id="chatBox"></ul>
+
+  <!-- Socket.IO CDN -->
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+  <script>
+    const socket = io();
+
+    socket.on("connect", () => {
+      console.log("Connected:", socket.id);
+    });
+
+    function joinProject() {
+      const projectId = document.getElementById("projectId").value;
+
+      socket.emit("joinProject", { projectId });
+
+      console.log("Joined project:", projectId);
+    }
+
+    function sendMessage() {
+      const projectId = document.getElementById("projectId").value;
+      const senderId = document.getElementById("senderId").value;
+      const text = document.getElementById("message").value;
+
+      socket.emit("sendChat", {
+        projectId,
+        senderId,
+        text
+      });
+
+      document.getElementById("message").value = "";
+    }
+
+    socket.on("receiveChat", (data) => {
+      console.log("New message:", data);
+
+      const li = document.createElement("li");
+      li.textContent = `${data.sender}: ${data.text}`;
+
+      document.getElementById("chatBox").appendChild(li);
+    });
+  </script>
+</body>
+</html>
