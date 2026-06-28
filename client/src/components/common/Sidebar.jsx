@@ -54,7 +54,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                     className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition
                     ${
                       isActive
-                        ? "bg-gradient-to-r from-cyan-400/20 to-purple-500/20 text-cyan-400"
+                        ? "bg-linear-to-r from-cyan-400/20 to-purple-500/20 text-cyan-400"
                         : "text-gray-400 hover:text-white hover:bg-white/5"
                     }`}
                   >

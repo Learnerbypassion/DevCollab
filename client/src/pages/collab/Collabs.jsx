@@ -89,7 +89,7 @@ export default function Collabs() {
           </Link>
           <Link
             to="/collabs/joined"
-            className="rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+            className="rounded-xl bg-linear-to-r from-cyan-500 to-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
           >
             Joined projects
           </Link>
